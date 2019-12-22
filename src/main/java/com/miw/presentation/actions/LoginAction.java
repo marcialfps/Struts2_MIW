@@ -1,5 +1,6 @@
 package com.miw.presentation.actions;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
@@ -9,6 +10,8 @@ import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 
 import com.miw.model.LoginInfo;
+import com.miw.model.User;
+import com.miw.presentation.user.UserManagerServiceHelper;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.validator.annotations.RequiredStringValidator;
 import com.opensymphony.xwork2.validator.annotations.Validations;
@@ -58,22 +61,27 @@ public class LoginAction extends ActionSupport implements RequestAware, SessionA
 
 	@Override
 	public String execute() throws Exception {
-
+	
 		if (!login.getCaptcha().equals("23344343")) {
 			request.put("mymessage", "Captcha is wrong");
 
 			return "captcha-error";
 		}
-		// We do a very basic authentication :).
-		if (login.getLogin().equals("admin") && login.getPassword().equals("amazin")) {
-			logger.debug("login.loggin" + login);
-			session.put("loginInfo", login);
-			return SUCCESS;
-		} else {
-			logger.debug("Credentials are wrong: " + login);
-			request.put("mymessage", "login.wrong");
-			return "login-error";
+		
+		UserManagerServiceHelper helper = new UserManagerServiceHelper();
+		List<User> users = helper.getUsers();
+		
+		for (User u : users) {
+			if(u.getUsername().equals(login.getLogin()) && u.getPassword().equals(login.getPassword())) {
+				logger.debug("login.loggin" + login);
+				session.put("loginInfo", login);
+				return SUCCESS;
+			}
 		}
+		
+		logger.debug("Credentials are wrong: " + login);
+		request.put("mymessage", "login.wrong");
+		return "login-error";
 	}
 
 	public void setRequest(Map<String, Object> request) {

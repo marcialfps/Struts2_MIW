@@ -26,14 +26,12 @@
 				<s:property value="#request.mymessage" />
 				<br />
 			</div>
-			<s:form action="login"  >
-				<s:textfield name="loginInfo.login" key="login" />
-				<s:password name="loginInfo.password" key="password" />
-				<s:textfield name="loginInfo.captcha" label="Introduce 23344343" />
+			<s:form action="register"  >
+				<s:textfield name="user.username" key="login" />
+				<s:textfield name="user.email" key="email" />
+				<s:password name="user.password" key="password" />
 				<s:submit />
 			</s:form>
-			<label class="mytitle"><s:text name="create-account"/></label>
-			<s:a action="register-form"><s:text name="here"/></s:a>
 		</article>
 	</section>
 	<footer>
