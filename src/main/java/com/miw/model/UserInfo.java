@@ -5,6 +5,7 @@ public class UserInfo {
 	private String username = null;
 	private String email = null;
 	private String password = null;
+	private String passwordRepeat = null;
 	
 	public UserInfo() {
 		super();
@@ -34,9 +35,18 @@ public class UserInfo {
 		this.password = password;
 	}
 
+	public String getPasswordRepeat() {
+		return passwordRepeat;
+	}
+
+	public void setPasswordRepeat(String passwordRepeat) {
+		this.passwordRepeat = passwordRepeat;
+	}
+
 	@Override
 	public String toString() {
-		return "UserInfo [username=" + username + ", email=" + email + ", password=" + password + "]";
+		return "UserInfo [username=" + username + ", email=" + email + ", password=" + password + ", passwordRepeat="
+				+ passwordRepeat + "]";
 	}
 
 }

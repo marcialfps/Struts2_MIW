@@ -28,8 +28,8 @@ import com.opensymphony.xwork2.validator.annotations.ValidatorType;
 
 @Validations(
 	requiredStrings = {
-				@RequiredStringValidator(type = ValidatorType.SIMPLE, fieldName = "loginInfo.login", message = "login.required"),
-				@RequiredStringValidator(type = ValidatorType.SIMPLE, fieldName = "loginInfo.password", message = "password.required") })
+				@RequiredStringValidator(type = ValidatorType.SIMPLE, fieldName = "loginInfo.login", key = "login.required"),
+				@RequiredStringValidator(type = ValidatorType.SIMPLE, fieldName = "loginInfo.password", key = "password.required") })
 
 public class LoginAction extends ActionSupport implements RequestAware, SessionAware {
 

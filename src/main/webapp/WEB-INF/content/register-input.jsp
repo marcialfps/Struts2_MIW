@@ -21,7 +21,11 @@
 	</nav>
 	<section>
 		<article>
-			<label class="mytitle"><s:text name="register"/></label><br />
+			<label class="mytitle"><s:text name="introduce-login"/></label><br />
+			<div style="color: red;">
+				<s:property value="#request.mymessage" />
+				<br />
+			</div>
 			<s:form action="register"  >
 				<s:textfield name="user.username" key="login" />
 				<s:textfield name="user.email" key="email" />
