@@ -51,8 +51,6 @@ public class LoginAction extends ActionSupport implements RequestAware, SessionA
 		this.login = login;
 	}
 	
-	
-
 	@Override
 	public void validate() {
 		logger.debug("Invoking validate!");

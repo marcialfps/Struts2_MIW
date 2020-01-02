@@ -13,7 +13,9 @@ import com.miw.model.Book;
 import com.miw.model.ShoppingCart;
 import com.opensymphony.xwork2.ActionSupport;
 
-@Results({@Result(name="success", location="view-shopping-cart.action", type="redirectAction")})
+@Results({
+	@Result(name="success", location="view-shopping-cart.action", type="redirectAction"),
+	@Result(name = "error", location = "/index.jsp")})
 
 public class AddToShoppingCartAction extends ActionSupport implements SessionAware, ApplicationAware {
 
@@ -26,30 +28,35 @@ public class AddToShoppingCartAction extends ActionSupport implements SessionAwa
 	@Override
 	public String execute() throws Exception {
 		logger.debug("Executing AddToShoppingCartAction");
-		ShoppingCart shoppingcart;
-
-		//If addedBooks is empty => notify???
 		
-		if(session.containsKey("shoppingcart")) {
-			shoppingcart = (ShoppingCart) session.get("shoppingcart");
-		} else {
-			shoppingcart = new ShoppingCart();
-		}
-		
-		for (String book : addedBooks) {
+		if (session.containsKey("loginInfo")) {
+			ShoppingCart shoppingcart;
 			
-			shoppingcart.add(getTitleOfBook(book));
+			if(session.containsKey("shoppingcart")) {
+				shoppingcart = (ShoppingCart) session.get("shoppingcart");
+			} else {
+				shoppingcart = new ShoppingCart();
+			}
+			
+			for (String book : addedBooks) {
+				
+				shoppingcart.add(getTitleOfBook(book));
+			}
+			
+			if(!session.containsKey("shoppingcart")) {
+				session.put("shoppingcart", shoppingcart);
+			}
+			
+			return SUCCESS;
+			
+		} else {
+			return ERROR;
 		}
 		
-		if(!session.containsKey("shoppingcart")) {
-			session.put("shoppingcart", shoppingcart);
-		}
-		
-		return SUCCESS;
 	}
 	
 	private String getTitleOfBook(String id) {
-		List<Book> books = (List<Book>) application.get("books"); //Mejorar?
+		List<Book> books = (List<Book>) application.get("books");
 		
 		for (Book b: books) {
 			if (b.getId() == Integer.parseInt(id)) {

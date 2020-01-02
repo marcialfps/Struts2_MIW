@@ -11,6 +11,7 @@
 		<h2 class="centered">
 			<s:text name="welcome-to-the"/> <em><s:text name="smallest"/></em> <s:text name="online-shop-word"/>
 		</h2>
+		<h3><s:a action="language"><s:text name="change-language"/></s:a></h3>
 	</header>
 	<nav>
 		<ul>
@@ -29,7 +30,7 @@
 			<s:form action="login"  >
 				<s:textfield name="loginInfo.login" key="login" />
 				<s:password name="loginInfo.password" key="password" />
-				<s:textfield name="loginInfo.captcha" label="Introduce 23344343" />
+				<s:textfield name="loginInfo.captcha" key="introduce-captcha" />
 				<s:submit />
 			</s:form>
 			<label class="mytitle"><s:text name="create-account"/></label>
