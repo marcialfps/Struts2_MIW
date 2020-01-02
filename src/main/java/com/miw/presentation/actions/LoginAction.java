@@ -61,7 +61,7 @@ public class LoginAction extends ActionSupport implements RequestAware, SessionA
 	public String execute() throws Exception {
 	
 		if (!login.getCaptcha().equals("23344343")) {
-			request.put("mymessage", "Captcha is wrong");
+			request.put("mymessage", getText("captcha.wrong"));
 
 			return "captcha-error";
 		}
@@ -78,7 +78,7 @@ public class LoginAction extends ActionSupport implements RequestAware, SessionA
 		}
 		
 		logger.debug("Credentials are wrong: " + login);
-		request.put("mymessage", "login.wrong");
+		request.put("mymessage", getText("login.wrong"));
 		return "login-error";
 	}
 
